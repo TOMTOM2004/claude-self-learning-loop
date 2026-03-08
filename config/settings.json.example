@@ -1,0 +1,31 @@
+{
+  "env": {
+    "CLAUDE_CODE_LANGUAGE": "ja"
+  },
+  "permissions": {
+    "allow": ["Bash(*)", "Read(**)", "Edit(**)", "Write(**)", "MultiEdit(**)", "NotebookEdit(**)"],
+    "deny": ["Read(./.env)", "Bash(rm *)", "Bash(rmdir *)"],
+    "defaultMode": "default"
+  },
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Bash",
+      "hooks": [{"type": "command",
+        "command": "$HOME/claude-memory-mcp/.venv/bin/python $HOME/claude-memory-mcp/pytest_tracker.py",
+        "timeout": 5}]
+    }],
+    "Stop": [{
+      "matcher": "*",
+      "hooks": [{"type": "command",
+        "command": "$HOME/claude-memory-mcp/.venv/bin/python $HOME/claude-memory-mcp/stop_lesson_check.py",
+        "timeout": 10}]
+    }],
+    "UserPromptSubmit": [{
+      "matcher": "*",
+      "hooks": [{"type": "command",
+        "command": "$HOME/claude-memory-mcp/.venv/bin/python $HOME/claude-memory-mcp/search_hook.py",
+        "timeout": 8}]
+    }]
+  },
+  "autoUpdatesChannel": "latest"
+}
