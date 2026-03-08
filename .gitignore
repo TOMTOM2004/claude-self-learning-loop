@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+claude-memory-mcp/data/
+.env
+*.env
+.DS_Store
